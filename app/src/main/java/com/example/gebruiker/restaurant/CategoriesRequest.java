@@ -24,6 +24,10 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         void gotCategoriesError(String message);
     }
 
+    public CategoriesRequest(Context context) {
+        this.context = context;
+    }
+
 
     @Override
     public void onResponse(JSONObject response) {
@@ -37,13 +41,14 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             for (int i = 0; i < jsonArray.length(); i++) {
                 categories.add(jsonArray.getString(i));
             }
+
+            activity.gotCategories(categories);
         }
         catch(JSONException jse){
 
         }
-        Log.d("hi", String.valueOf(categories));
-//        activity.gotCategories(categories);
-    }
+
+}
 
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -52,12 +57,9 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
     }
 
-    public CategoriesRequest(Context context) {
-        this.context = context;
-
-    }
 
     public void getCategories(Callback activity) {
+        this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://resto.mprog.nl/categories",null, this, this);
