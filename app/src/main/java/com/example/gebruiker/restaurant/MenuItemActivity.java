@@ -3,6 +3,8 @@ package com.example.gebruiker.restaurant;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,5 +32,17 @@ public class MenuItemActivity extends AppCompatActivity {
         String priceText = "€ " + String.valueOf(retrievedCategory.getPrice());
         price.setText(priceText);
 
+        Button order = findViewById(R.id.order);
+        order.setOnClickListener(new OrderClickListener());
+
     }
+
+    private class OrderClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(MenuItemActivity.this, OrderedActivity.class);
+            startActivity(intent);
+        }
+    }
+
 }

@@ -43,11 +43,11 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
     @Override
     public void gotMenuError(String message) {
 
-        // when categories are not loaded succesfully, print error
+        // when categories are not loaded successfully, print error
         Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
     }
 
-    // Click on item leads to detailed activity, info of menu item being passed on in intent
+    // click on item leads to detailed activity, info of menu item being passed on in intent
     private class ItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

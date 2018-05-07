@@ -46,8 +46,10 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 // retrieve category per JSON item
                 String category = jsonObject.getString("category");
+
                 // if category has to be in list, include in list
                 if (requestedCategory.equals(category)) {
                     MenuItem item = new MenuItem(jsonObject.getString("name"), jsonObject.getString("description"), jsonObject.getString("image_url"), jsonObject.getInt("price"), category);
@@ -57,16 +59,15 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
             }
         }
         catch(JSONException jse){
-
+            jse.printStackTrace();
         }
     }
 
-    public void getMenu(Callback activityC) {
-        activity = activityC;
+    public void getMenu(Callback activity) {
+        this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://resto.mprog.nl/menu",null, this, this);
         queue.add(jsonObjectRequest);
     }
-
 }
