@@ -29,7 +29,7 @@ public class MenuAdapter extends ArrayAdapter<MenuItem> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_menu, parent, false);
         }
 
-        // Display info per grid item according to grid_item.xml
+        // display info per list item according to item_categories.xml
         TextView name = convertView.findViewById(R.id.name);
         name.setText(menuItems.get(position).getName());
 

@@ -18,32 +18,40 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // Retrieve requested category from intent
+        // retrieve requested category from intent
         Intent intent = getIntent();
-        String category = (String) intent.getStringExtra("category");
-        Log.d("intent: category", category);
+        String category = intent.getStringExtra("category");
 
+        // create new request for menu corresponding to category
         MenuRequest request = new MenuRequest(this, category);
         request.getMenu(this);
     }
 
     @Override
     public void gotMenu(ArrayList<MenuItem> menuItems) {
+
+        // when menu items are loaded, use adapter to display them in listview
         MenuAdapter adapter = new MenuAdapter(this, R.layout.item_menu, menuItems);
+
         ListView lv = findViewById(R.id.list);
         lv.setAdapter(adapter);
+
+        // also set a listener to the items in listview
         lv.setOnItemClickListener(new ItemClickListener());
     }
 
     @Override
     public void gotMenuError(String message) {
+
+        // when categories are not loaded succesfully, print error
         Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
     }
 
-    // Click on item leads to detailed activity, info of friend being passed on in intent
+    // Click on item leads to detailed activity, info of menu item being passed on in intent
     private class ItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             MenuItem clickedCategory = (MenuItem) parent.getItemAtPosition(position);
 
             Intent intent = new Intent(MenuActivity.this, MenuItemActivity.class);

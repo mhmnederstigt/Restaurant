@@ -19,7 +19,6 @@ public class CategoriesAdapter extends ArrayAdapter<String> {
         super(context, resource, objects);
 
         categories = objects;
-
     }
 
     @NonNull
@@ -30,14 +29,10 @@ public class CategoriesAdapter extends ArrayAdapter<String> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_categories, parent, false);
         }
 
-        // Display info per grid item according to grid_item.xml
+        // display info per list item according to item_categories.xml
         TextView textView = (TextView) convertView.findViewById(R.id.displaycat);
         textView.setText(categories.get(position).toString());
 
         return convertView;
-
-
-
-
     }
 }
