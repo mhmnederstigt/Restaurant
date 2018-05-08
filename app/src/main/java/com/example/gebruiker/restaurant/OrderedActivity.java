@@ -3,6 +3,7 @@ package com.example.gebruiker.restaurant;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OrderedActivity extends AppCompatActivity implements OrderRequest.Callback {
 
@@ -20,12 +21,14 @@ public class OrderedActivity extends AppCompatActivity implements OrderRequest.C
     @Override
     public void gotConfirmation(int time) {
         TextView deliveryTime = findViewById(R.id.delivery);
-        deliveryTime.setText(String.valueOf(time));
+        deliveryTime.setText("The estimated time of arrival is " + String.valueOf(time) + " minutes.");
 
     }
 
     @Override
     public void gotConfirmationError(String message) {
 
+        // when categories are not loaded succesfully, print error
+        Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
     }
 }

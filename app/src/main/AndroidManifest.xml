@@ -21,7 +21,8 @@
         <activity android:name=".CategoriesActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MenuItemActivity" />
-        <activity android:name=".OrderedActivity"></activity>
+        <activity android:name=".OrderedActivity" />
+        <activity android:name=".ShoppingCartActivity"></activity>
     </application>
 
 </manifest>

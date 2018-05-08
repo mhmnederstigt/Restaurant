@@ -12,14 +12,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity implements MenuRequest.Callback {
+    ArrayList<MenuItem> shoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // retrieve requested category from intent
+        // check if items from shopping cart are saved in intent
         Intent intent = getIntent();
+        shoppingCart = (ArrayList<MenuItem>) intent.getSerializableExtra("shoppingCart");
+
+        // and retrieve requested category from intent
         String category = intent.getStringExtra("category");
 
         // create new request for menu corresponding to category
@@ -56,7 +60,9 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
 
             Intent intent = new Intent(MenuActivity.this, MenuItemActivity.class);
             intent.putExtra("clickedCategory", clickedCategory);
+            intent.putExtra("shoppingCart", shoppingCart);
             startActivity(intent);
+            finish();
         }
     }
 }
