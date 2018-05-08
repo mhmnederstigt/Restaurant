@@ -14,8 +14,6 @@ public class OrderedActivity extends AppCompatActivity implements OrderRequest.C
 
         OrderRequest request = new OrderRequest(this);
         request.getConfirmation(this);
-
-
     }
 
     @Override
@@ -30,5 +28,11 @@ public class OrderedActivity extends AppCompatActivity implements OrderRequest.C
 
         // when categories are not loaded succesfully, print error
         Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(0);
+        finish();
     }
 }

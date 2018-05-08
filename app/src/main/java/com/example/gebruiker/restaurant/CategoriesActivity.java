@@ -57,8 +57,17 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
             Intent intent = new Intent(CategoriesActivity.this, MenuActivity.class);
             intent.putExtra("category", category);
             intent.putExtra("shoppingCart", shoppingCart);
-            startActivity(intent);
-            finish();
+            startActivityForResult(intent, 1);
+        }
+    }
+
+    @Override
+    // on return, retrieve shopping cart
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            if (data.hasExtra("shoppingCart")) {
+                shoppingCart =  (ArrayList<MenuItem>) data.getExtras().getSerializable("shoppingCart");
+            }
         }
     }
 }

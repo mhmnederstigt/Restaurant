@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity implements MenuRequest.Callback {
     ArrayList<MenuItem> shoppingCart;
+    MenuItem clickedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,35 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            MenuItem clickedCategory = (MenuItem) parent.getItemAtPosition(position);
+            clickedCategory = (MenuItem) parent.getItemAtPosition(position);
 
             Intent intent = new Intent(MenuActivity.this, MenuItemActivity.class);
             intent.putExtra("clickedCategory", clickedCategory);
             intent.putExtra("shoppingCart", shoppingCart);
-            startActivity(intent);
-            finish();
+            startActivityForResult(intent, 1);
+        }
+    }
+
+    @Override
+    // pass on shopping cart when returning to last activity on stack
+    public void finish() {
+
+        // prepare
+        Intent intent = new Intent();
+        intent.putExtra("shoppingCart", shoppingCart);
+
+        // activity finished ok, return shopping cart
+        setResult(RESULT_OK, intent);
+        super.finish();
+    }
+
+    @Override
+    // on return, retrieve shopping cart
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            if (data.hasExtra("shoppingCart")) {
+                shoppingCart =  (ArrayList<MenuItem>) data.getExtras().getSerializable("shoppingCart");
+            }
         }
     }
 }
