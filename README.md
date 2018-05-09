@@ -1,2 +1,8 @@
-# Restaurant
-AppStudio Project Week 5
+# AppStudio
+Homework Course App Studio Milou Nederstigt
+
+Week 3 -- Friendsr 
+
+Screenshot:
+
+![Screenshot Friendsr](doc/Screenshot_friendsr.png)
